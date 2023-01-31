@@ -14,7 +14,7 @@ int[] ChangeToDouble(int num)
     int[] doubleArr = new int[count];
     for (int index = 0; index < count; index++)
     {
-        doubleArr[index] = num % 2;
+        doubleArr[count-index-1] = num % 2;
         num = num / 2;
     }
     return doubleArr;
