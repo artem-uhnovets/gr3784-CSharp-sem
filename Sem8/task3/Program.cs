@@ -2,46 +2,6 @@
 // Только для цифр 1 - 9.
 // Усложненная для всех чисел.
 
-// {1, 9, 9, 0, 2, 8, 0, 9}    0 вcтречается 2 раза
-//                             1 встречается 1 раз
-//                             2 встречается 1 раз
-//                             8 встречается 1 раз
-//                             9 встречается 3 раза
-
-// 1, 2, 3                        1 встречается 3 раза
-// 4, 6, 1                        2 встречается 2 раза
-// 2, 1, 6                        3 встречается 1 раз
-//                                4 встречается 1 раз
-//                                6 встречается 2 раза
-
-
-// void FreqDigit(int[,] array)
-// {
-//     Console.WriteLine();
-//     for (int digit = 0; digit <= 9; digit++)
-//     {
-//         FindDigit(array, digit);
-//     }
-
-// }
-
-// int FindDigit(int[,] array, int digit)
-// {
-//     int count = 0;
-//     for (int i = 0; i < array.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < array.GetLength(1); j++)
-//         {
-//             if (array[i, j] == digit)
-//             {
-//                 count++;
-//             }
-//         }
-//     }
-//     if (count > 0) Console.WriteLine($"{digit} встречается {count} раз(а).");
-//     return count;
-// }
-
 Console.Clear();
 
 int FindDigit(int[,] array, int digit)
@@ -76,12 +36,31 @@ int[,] FreqDigit(int[,] array)
     return countArray;
 }
 
+int CheckElementArray(int[,] array, int number)
+{
+    int count = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if (array[i, j] == number)
+            {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
 void PrintArray2(int[,] array)
 {
     Console.WriteLine();
     for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write("{0} встречается {1} раз(а)", array[i, 0], array[i, 1]);
+        int count = 0;
+        count = CheckElementArray(array, array[i,0]);
+        if (count > 1) continue;
+        else Console.Write("{0} встречается {1} раз(а)", array[i, 0], array[i, 1]);
         Console.WriteLine();
     }
 }
@@ -125,3 +104,42 @@ int[,] array = GetArray(sizeRow, sizeColumn, 0, 100);
 PrintArray(array);
 int[,] countArray = FreqDigit(array);
 PrintArray2(countArray);
+
+// {1, 9, 9, 0, 2, 8, 0, 9}    0 вcтречается 2 раза
+//                             1 встречается 1 раз
+//                             2 встречается 1 раз
+//                             8 встречается 1 раз
+//                             9 встречается 3 раза
+
+// 1, 2, 3                        1 встречается 3 раза
+// 4, 6, 1                        2 встречается 2 раза
+// 2, 1, 6                        3 встречается 1 раз
+//                                4 встречается 1 раз
+//                                6 встречается 2 раза
+
+// void FreqDigit(int[,] array)
+// {
+//     Console.WriteLine();
+//     for (int digit = 0; digit <= 9; digit++)
+//     {
+//         FindDigit(array, digit);
+//     }
+
+// }
+
+// int FindDigit(int[,] array, int digit)
+// {
+//     int count = 0;
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             if (array[i, j] == digit)
+//             {
+//                 count++;
+//             }
+//         }
+//     }
+//     if (count > 0) Console.WriteLine($"{digit} встречается {count} раз(а).");
+//     return count;
+// }
