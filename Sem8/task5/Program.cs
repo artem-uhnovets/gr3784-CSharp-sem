@@ -27,16 +27,16 @@ int[,] ModifArray(int[,] array)
     return modifArray;
 }
 
-int Factorial(int number)
-{
-    int factorial = 1;
-    for (int index = 0; index <= number; index++)
-    {
-        factorial *= index;
-        if (factorial == 0) factorial = 1;
-    }
-    return factorial;
-}
+// int Factorial(int number)
+// {
+//     int factorial = 1;
+//     for (int index = 0; index <= number; index++)
+//     {
+//         factorial *= index;
+//         if (factorial == 0) factorial = 1;
+//     }
+//     return factorial;
+// }
 
 // void PrintArray(int[,] array)
 // {
@@ -96,8 +96,9 @@ int[,] GetArray(int size)
 int GetSize(string text)
 {
     Console.WriteLine(text);
-    int size = int.Parse(Console.ReadLine());
-    return size;
+    string size = Console.ReadLine();
+    while (int.TryParse(size, out _) == false || String.IsNullOrEmpty(size) || int.Parse(size) == 0) { Console.WriteLine(text); size = Console.ReadLine(); }
+    return int.Parse(size);
 }
 
 int size = GetSize("Сколько первых строк треугольника Паскаля вывести?");

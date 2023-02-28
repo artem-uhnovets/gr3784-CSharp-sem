@@ -36,32 +36,27 @@ int[,] FreqDigit(int[,] array)
     return countArray;
 }
 
-int CheckElementArray(int[,] array, int number)
+void CheckElementArray(int[,] array)
 {
-    int count = 0;
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            if (array[i, j] == number)
-            {
-                count++;
-            }
-        }
-    }
-    return count;
-}
-
-void PrintArray2(int[,] array)
-{
-    Console.WriteLine();
     for (int i = 0; i < array.GetLength(0); i++)
     {
         int count = 0;
-        count = CheckElementArray(array, array[i,0]);
-        if (count > 1) continue;
-        else Console.Write("{0} встречается {1} раз(а)", array[i, 0], array[i, 1]);
-        Console.WriteLine();
+        if (i == 0)
+        {
+            Console.WriteLine("{0} встречается {1} раз(а)", array[i, 0], array[i, 1]);
+            continue;
+        }
+        for (int k = 0; k < i; k++)
+        {
+            if (array[k, 0] == array[i, 0])
+            {
+                count++;
+                continue;
+            }
+        }
+        if (count != 0) continue;
+        else Console.WriteLine("{0} встречается {1} раз(а)", array[i, 0], array[i, 1]);
+
     }
 }
 
@@ -94,8 +89,9 @@ int[,] GetArray(int rows, int columns, int min, int max)
 int GetSize(string text)
 {
     Console.WriteLine(text);
-    int size = int.Parse(Console.ReadLine());
-    return size;
+    string size = Console.ReadLine();
+    while (int.TryParse(size, out _) == false || String.IsNullOrEmpty(size) || int.Parse(size) == 0) { Console.WriteLine(text); size = Console.ReadLine(); }
+    return int.Parse(size);
 }
 
 int sizeRow = GetSize("Введите кол-во строк ");
@@ -103,7 +99,7 @@ int sizeColumn = GetSize("Введите кол-во столбцов ");
 int[,] array = GetArray(sizeRow, sizeColumn, 0, 100);
 PrintArray(array);
 int[,] countArray = FreqDigit(array);
-PrintArray2(countArray);
+CheckElementArray(countArray);
 
 // {1, 9, 9, 0, 2, 8, 0, 9}    0 вcтречается 2 раза
 //                             1 встречается 1 раз
